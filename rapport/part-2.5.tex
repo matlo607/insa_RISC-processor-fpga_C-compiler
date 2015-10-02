@@ -1,0 +1,7 @@
+\subsubsection*{Ajout des commentaires}
+
+Nous aurions aimé implémenter les commentaires en utilisant les états associés à Lex. Cependant malgré l’aide apportée par les enseignants, nous n’avons pas réussi à les faire fonctionner. Il aurait fallu y passer un peu plus de temps, mais le nombre de séances dont nous disposions ne nous a pas suffit.
+
+\subsubsection*{Amélioration de la gestion des registres dans le cross-compilateur}
+
+Actuellement, lorsque tous les registres ont été alloués, le cross-compilateur renvoit une erreur à l'utilisateur lui indiquant qu'il n'a plus de registres disponibles. Il faudrait créer un système de sauvegarde et de restauration des registres qui semble plutôt complexe à mettre en place. Il faudrait garder une trace quelque part des registres sauvegardés avec quelques informations comme le numéro de registre où était présente cette valeur, la valeur à restaurer, et enfin il faudrait détecter le bon moment pour restaurer ce registre pour la cohérence. Tout cela implique le rajout d'instructions supplémentaires ce qui ne nous arrange pas vraiment car les valeurs des sauts ne seraient plus valides et à recalculer.

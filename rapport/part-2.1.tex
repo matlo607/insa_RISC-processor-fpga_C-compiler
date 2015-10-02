@@ -1,0 +1,67 @@
+\subsection{La partie déclaration}
+
+Le compilateur reconnaît toutes les formes de déclarations demandées, à savoir les variables entières constantes et non constantes. Il est possible de déclarer plusieurs variables à la suite séparées par des virgules. L’affectation est aussi possible au choix au niveau de la déclaration. Elle est par contre obligatoire pour les constantes.\\
+
+Exemples de déclarations reconnues :
+\begin{minted}[fontsize=\scriptsize]{c}
+  int a;
+  int toto, b = 31, c = 2e2, d = 1E1, e = -1;
+  const int L = 10;
+\end{minted}
+
+\vspace{10pt}
+
+Contrairement aux standards actuels C, il n’est pas possible de faire des déclarations autre part qu’au début de chaque bloc (début du \texttt{main}, des \texttt{if} ou des \texttt{while}).\\
+La portée des variables est également implémentée. On peut utiliser une variable déclarée à une profondeur inférieure. On peut également déclarer une variable qui a le même identificateur qu’une déclarée à une profondeur inférieure.
+
+\begin{minted}[fontsize=\scriptsize]{c}
+  // profondeur 1
+  int a;
+  
+  if (condition) {
+    
+    // profondeur 2
+    int a;
+    
+    a = 1; // fait reference au 'a' declaree au-dessus
+  }
+\end{minted}
+
+\subsection{Les opérations arithmétiques}
+
+Il est possible d'utiliser les quatre opérations arithmétiques de base ($+$, $-$, $*$, $/$) sous forme parenthésée. On peut les placer où l'on veut (dans une affectation, une condition logique ou encore dans un \texttt{printf}).
+
+\subsection{Les opérations logiques}
+
+La gestion des booléens est la même qu’en C, l'entier 0 est interprété comme \textit{false} et tout le reste comme \textit{true}.\\
+On peut réaliser des opérations logiques dans les parties conditions des \texttt{if} et des \texttt{while} mais aussi stocker l'évaluation d'une condition dans une variable.\\
+Concernant les opérateurs logiques, \texttt{OR} (\texttt{||}), \texttt{AND} (\texttt{\&\&}) et \texttt{NOT} (\texttt{!}) sont utilisables. On peut comparer deux expressions arithmétiques avec \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}, \texttt{==} ou \texttt{!=}.\\
+
+Exemples :
+\begin{minted}[fontsize=\scriptsize]{c}
+  /* fonctionnel */
+  
+  int a = a > 0;
+  
+  while ((a || 1 > 5)  && (b - (-8) + a >= 0)) {
+    /* ... */
+  }
+
+  /* non implemente */
+  while ( a = 1) {}
+\end{minted}
+
+\subsection{Les structures de contrôle}
+
+\subsubsection*{Les alternatives}
+
+Le \texttt{if} est similaire à celui du langage C avec un \texttt{if} suivi d’éventuellement d'un ou plusieurs \texttt{else if}, suivi(s) éventuellement d’un \texttt{else}. Les accolades sont obligatoires. On peut les imbriquer les unes dans les autres à souhait.
+
+\subsubsection*{Les boucles}
+
+Le \texttt{while} tout simple est implémenté avec accolades également obligatoires et imbrication.
+
+\subsubsection*{Les fonctions}
+
+Aucune fonction n'existe excepté le \texttt{printf} qui permet d’afficher sur la sortie standard la valeur d’un entier (à calculer ou non).\\
+La seule fonction définissable est le \texttt{main}.

@@ -1,0 +1,7 @@
+
+setMode -bs
+addDevice -p 1 -file synthesis/global.bit
+setCable -port auto
+Program -p 1
+exit
+

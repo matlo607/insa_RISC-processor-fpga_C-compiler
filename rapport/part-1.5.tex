@@ -1,0 +1,11 @@
+\subsubsection*{Partionnement en module}
+
+Nous n'avons pas bien codé le chemin de données. Il aurait fallu créer des sous-modules comme pour le contrôleur des aléas. Cela aurait été plus facile à gérer et deboger.
+
+\subsubsection*{Gestion complète des flags}
+
+Nous ne gérons pas complètement les flags au niveau de l'ALU. Le flag d'\textit{overflow} ne marche que pour les additions. Le travail est déjà en partie fait puisqu'on a détaillé lors de la description de l'ALU les différents cas, il ne reste plus qu'à l'implémenter.
+
+\subsubsection*{Implémentation de la division}
+
+La division n'a pu être implémentée au niveau matériel car les bibliothèques fournies ne permettaient pas de directement effectuer une division. Il aurait fallu implémenter nous-même ce module mais par manque de temps, nous n'avons pas commencé. De plus, ce module n'est pas si simple que ça à implémenter. Dans un avenir immédiat, le plus rapide et le plus simple serait de gérer la division par 2 qui ne nécessite qu'un décalage à gauche. Ensuite en jouant avec les instructions en assembleur, une succession de décalages à gauche et de soustractions nous emmèneraient au résultat pour n'importe quelle division.

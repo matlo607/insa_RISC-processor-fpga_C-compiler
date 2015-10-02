@@ -1,0 +1,201 @@
+\documentclass[a4paper]{report}
+\usepackage{anysize}
+\marginsize{3cm}{3cm}{2cm}{2cm}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\graphicspath{ {img/} }
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{2}
+
+% addresse du tuto pour activer la coloration du code
+% http://blog.hikoweb.net/index.php?post/2012/02/04/Colorer-du-code-source-dans-un-rapport-LaTeX-avec-Minted
+\usepackage{minted}
+
+\newcommand{\english}[1]{\textit{#1}}
+\newcommand{\brand}[1]{\textbf{#1}}
+\newcommand{\nexys} {Nexys3}
+\newcommand{\fpga} {FPGA}
+\newcommand{\fpgas} {FPGAs}
+\newcommand{\TODO}[1]{\textbf{\textcolor{blue}{#1}}}
+
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,        % color of internal links (change box color with linkbordercolor)
+    citecolor=magenta,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=[rgb]{0,0,0.5}           % color of external links
+}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+
+\usepackage{color}
+\lstset{
+  numbers=none,
+  frame=single,
+  tabsize=4,
+  breaklines=true,
+  keywordstyle=\color{blue}\textbf,
+  commentstyle=\color{mygreen}\textit,
+  stringstyle=\color{red},
+  basicstyle=\footnotesize,
+  backgroundcolor=\color{white}
+}
+
+% Pieds de page et en-tête
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\lfoot{Projet Systèmes Informatiques : du compilateur vers le microprocesseur}
+\cfoot{}
+\rfoot{Page \thepage}
+
+
+\begin{document}
+
+\begin{titlepage}
+
+\centering
+
+{\Large {\bf Rapport de projet}}\\
+
+\vspace{30pt}
+
+{\huge Architectures matérielles de systèmes informatiques}\\
+\vspace{50pt}
+{\Huge Du compilateur vers le microprocesseur}\\
+
+\vspace{130pt}
+
+\underline{Chargé de TP :} \\
+\vspace{5pt}
+Fernand LONE-SANG
+
+\vspace{30pt}
+Benoît GAYRAUD\\
+Matthieu LONGO
+
+\vspace{5pt}
+
+\par
+{\tt bgayrau@etud.insa-toulouse.fr}\\
+{\tt longo@etud.insa-toulouse.fr}\\
+
+\vspace{20pt}
+
+\vfill {\bf Description}\medskip \\
+  \fbox{
+    \begin{minipage}{0.9\textwidth}
+      Conception d'un microprocesseur de type RISC avec un pipeline à 5 étages.\\
+      Développer un compilateur en utilisant LEX et YACC en utilisant les concepts abordés en cours d'Automates \& Langages.
+    \end{minipage} 
+  }
+
+\vspace{50px}
+
+
+\begin{center}
+DGEI\\
+4\up{ème} année  Informatique et Réseaux\\
+2012-2013
+\end{center}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.45]{logoINSA.jpg}
+\end{figure}
+
+
+\begin{center}
+\LaTeX
+\end{center}
+
+\end{titlepage}
+
+
+\tableofcontents
+
+\newpage
+
+\chapter*{Introduction} \addcontentsline{toc}{chapter}{Introduction}
+\input{intro}
+\newpage
+
+
+\chapter{Développement du microprocesseur}
+
+Après avoir regardé les spécifications du microprocesseur, nous l'avons implémenté en deux temps.\\
+Premièrement, nous avons implémenté les sous-modules du processeur(ALU, banc de registres) et ceux extérieurs au processeur comme la RAM et la ROM. Nous avons pu effectuer des testbenchs sur chacun des composants afin de vérifier son bon fonctionnement. Il a fallu  également synthétiser les modules pour vérifier qu'ils étaient bien implémentables.\\
+Par la suite, par soucis de simplicité, nous avons intégrer tous ces modules dans un macro-module. Nous avons donc à la fois la RAM et l'ALU dans le même module alors que sur un vrai processeur, cela ne devrait jamais se produire. C'est au cours de cette deuxième étape que l'on a eu à introduire les unités de saut et de gestion du pipeline.\\
+Enfin, on suivra l'exécution d'un programme de test sur un chronogramme et on concluera sur les points à améliorer ou à implémenter par rapport aux spécifications.
+
+\newpage
+
+\section{Les spécifications}
+\input{part-1.1}
+
+\section{Les points difficiles}
+\input{part-1.4}
+
+\section{Programmes de tests :}
+\input{part-1.3}
+
+\newpage
+
+\section{Reste à faire et améliorations}
+\input{part-1.5}
+
+\newpage
+
+\chapter{Développement du compilateur}
+
+Le développement du compilateur s'est déroulé en deux phases.\\
+Premièrement, nous avons réalisé un analyseur lexical qui détectait les mots de notre langage C. Puis une fois celui-ci opérationnel, nous avons développé l'analyseur syntaxique qui vérifiait que notre fichier C était bien formé.\\
+Dans un deuxième temps, nous avons rajouté à l'analyseur syntaxique la génération d'un code intermédiaire qui plus tard allait être transformé en code binaire grâce au cross-compilateur.\\
+Mais avant d'aller plus loin dans les explications, nous allons présenter le langage C supporté par notre compilateur.
+
+\newpage
+
+\section{Le langage C reconnu}
+\input{part-2.1}
+
+\section{Les composants du compilateur}
+\input{part-2.2}
+
+\section{Difficultés}
+\input{part-2.4}
+
+\section{Reste à faire et améliorations}
+\input{part-2.5}
+
+\newpage
+
+\chapter*{Conclusion} \addcontentsline{toc}{chapter}{Conclusion}
+\input{conclu}
+ 
+\newpage
+
+\addcontentsline{toc}{chapter}{Table des figures}
+\listoffigures
+
+\newpage
+
+\chapter*{Code source} \addcontentsline{toc}{chapter}{Code source}
+
+L'ensemble des sources du projet est disponible sur le dépôt Git suivant :\\
+\url{https://github.com/matlo607/insa_RISC-processor-fpga_C-compiler}
+
+\end{document}
